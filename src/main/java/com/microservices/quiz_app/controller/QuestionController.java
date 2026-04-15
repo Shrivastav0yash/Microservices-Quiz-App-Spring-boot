@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,11 @@ public class QuestionController {
     public ResponseEntity<?> getAllQuestions(){
         List<Question> allQuestions = questionService.getAllQuestions();
         return new ResponseEntity<>(allQuestions ,HttpStatus.OK);
+    }
+
+    @GetMapping("category/{category}")
+    public ResponseEntity<?> getQuestionsByCategory(@PathVariable String category){
+        List<Question> questionsByCategory = questionService.getQuestionsByCategory(category);
+        return new ResponseEntity<>(questionsByCategory, HttpStatus.OK);
     }
 }
