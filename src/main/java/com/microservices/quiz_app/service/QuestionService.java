@@ -20,4 +20,13 @@ public class QuestionService {
     public List<Question> getQuestionsByCategory(String category) {
         return questionsRepo.findByCategory(category);
     }
+
+    public String addQuestion(Question question) {
+        questionsRepo.save(question);
+        return "Question add successfully";
+    }
+
+    public void deleteQuestion(Long id) {
+        questionsRepo.deleteById(id);
+    }
 }
