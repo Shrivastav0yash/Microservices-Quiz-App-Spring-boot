@@ -3,7 +3,6 @@ package com.microservices.quiz_app.controller;
 import com.microservices.quiz_app.entities.QuestionWrapper;
 import com.microservices.quiz_app.entities.Response;
 import com.microservices.quiz_app.service.QuizService;
-import jdk.dynalink.linker.support.CompositeGuardingDynamicLinker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
