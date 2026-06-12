@@ -1,284 +1,295 @@
-# Quiz Application Microservices
+# 🚀 Microservices Quiz Application
 
-A distributed Quiz Application built using Spring Boot Microservices Architecture. The application demonstrates service discovery, inter-service communication, and the database-per-service pattern to create a scalable and maintainable backend system.
+A complete Quiz Management System built using Spring Boot Microservices architecture. This project demonstrates modern distributed system concepts such as Service Discovery, API Gateway, Inter-Service Communication, and Database-per-Service architecture.
 
----
-
-## Project Overview
-
-This project is composed of multiple independent microservices, each with a dedicated responsibility and its own database.
-
-| Service | Status | Description |
-|----------|----------|-------------|
-| Service Registry | ✅ Completed | Handles service registration and discovery |
-| Question Service | ✅ Completed | Manages question-related operations |
-| Quiz Service | ✅ Completed | Creates and manages quizzes |
+The application is designed using independent microservices, where each service has a dedicated responsibility and database, ensuring scalability, maintainability, and loose coupling.
 
 ---
 
-## Architecture
+# 🏗️ Architecture
 
 ```text
-                           ┌─────────────────────┐
-                           │  Service Registry   │
-                           │   (Eureka Server)   │
-                           └──────────┬──────────┘
-                                      │
-                   ┌──────────────────┼──────────────────┐
-                   │                                     │
-                   ▼                                     ▼
-
-         ┌─────────────────┐                 ┌─────────────────┐
-         │ Question Service│◄──────────────►│   Quiz Service  │
-         └────────┬────────┘    REST APIs    └────────┬────────┘
-                  │                                   │
-                  ▼                                   ▼
-
-         ┌─────────────────┐                 ┌─────────────────┐
-         │  Question DB    │                 │    Quiz DB      │
-         └─────────────────┘                 └─────────────────┘
+                           +-------------------+
+                           |  Service Registry |
+                           |     (Eureka)      |
+                           +---------+---------+
+                                     |
+                          +----------v----------+
+                          |     API Gateway     |
+                          +----------+----------+
+                                     |
+                    -----------------------------------
+                    |                                 |
+          +---------v---------+             +---------v---------+
+          | Question Service  |             |   Quiz Service    |
+          +---------+---------+             +---------+---------+
+                    |                                 |
+          +---------v---------+             +---------v---------+
+          |   Question DB     |             |      Quiz DB      |
+          +-------------------+             +-------------------+
 ```
 
 ---
 
-## Microservices Principles Implemented
+# 📌 Overview
 
-### Service Independence
+The Microservices Quiz Application consists of multiple independently deployable services:
 
-Each microservice has its own:
+* **Service Registry** for service discovery.
+* **API Gateway** as the single entry point for all client requests.
+* **Question Service** for managing questions.
+* **Quiz Service** for creating quizzes and evaluating responses.
+* **Separate databases** for each microservice.
 
-- Source Code
-- Business Logic
-- Database
-- Deployment Lifecycle
-
-### Database Per Service
-
-The application follows the Database-per-Service pattern.
-
-| Service | Database |
-|----------|----------|
-| Question Service | Question Database |
-| Quiz Service | Quiz Database |
-
-Services communicate through REST APIs and never access another service's database directly.
-
-### Service Discovery
-
-The Service Registry (Netflix Eureka) enables:
-
-- Dynamic Service Registration
-- Service Discovery
-- Health Monitoring
-- Scalability Support
+All services communicate through the Spring Cloud ecosystem and are registered with Eureka Server.
 
 ---
 
-# Services
+# ✨ Features
 
-## 1. Service Registry
+## API Gateway
 
-The Service Registry acts as the central discovery server for all microservices.
+* Single entry point for all client requests.
+* Dynamic routing using Eureka Service Discovery.
+* Centralized request management.
+* Load balancing support.
+* Simplified client communication.
+* Decouples clients from internal services.
 
-### Responsibilities
+## Question Service
 
-- Register Microservices
-- Discover Available Services
-- Maintain Service Instances
-- Monitor Service Health
+* Create questions.
+* Store questions in MySQL database.
+* Retrieve questions by category.
+* Generate random questions.
+* Provide questions to Quiz Service.
+* Manage question-related operations independently.
 
-### Repository
+## Quiz Service
 
-🔗 https://github.com/Shrivastav0yash/quiz_app_service_registry
+* Create quizzes dynamically.
+* Generate quizzes based on category and number of questions.
+* Fetch questions from Question Service.
+* Submit quiz responses.
+* Calculate quiz scores.
+* Manage quiz-related operations independently.
 
-### Technology
+## Service Registry
 
-- Spring Boot
-- Spring Cloud
-- Netflix Eureka
-
----
-
-## 2. Question Service
-
-The Question Service manages all question-related operations.
-
-### Responsibilities
-
-- Create Questions
-- Retrieve Questions
-- Retrieve Questions By Category
-- Generate Question Sets
-- Provide Questions To Quiz Service
-
-### Repository
-
-🔗 https://github.com/Shrivastav0yash/question_service
-
-### Technology
-
-- Spring Boot
-- Spring Data JPA
-- MySQL
-- REST APIs
+* Eureka Server implementation.
+* Automatic service registration.
+* Service discovery between microservices.
+* Centralized service management.
 
 ---
 
-## 3. Quiz Service
+# 🛠️ Tech Stack
 
-The Quiz Service manages all quiz-related operations and communicates with the Question Service to generate quizzes dynamically.
+## Backend
 
-### Responsibilities
+* Java 21
+* Spring Boot
+* Spring Data JPA
+* Spring Web
+* Spring Cloud Gateway
+* Spring Cloud Netflix Eureka
+* Maven
 
-- Create Quizzes
-- Store Quiz Data
-- Request Questions From Question Service
-- Retrieve Quiz Details
-- Manage Quiz-Question Relationships
+## Database
 
-### Repository
+* MySQL
 
-🔗 https://github.com/Shrivastav0yash/quiz_service
+## Tools
 
-### Technology
-
-- Spring Boot
-- Spring Data JPA
-- MySQL
-- REST APIs
-
----
-
-## Technology Stack
-
-### Backend
-
-- Java
-- Spring Boot
-- Spring Cloud
-
-### Database
-
-- MySQL
-
-### Build Tool
-
-- Maven
-
-### Communication
-
-- REST APIs
-
-### Service Discovery
-
-- Netflix Eureka
-
-### Development Tools
-
-- IntelliJ IDEA
-- Postman
-- Git
-- GitHub
+* IntelliJ IDEA
+* Git & GitHub
+* Postman
 
 ---
 
-## Features Demonstrated
+# 📂 Project Structure
 
-- Microservices Architecture
-- Service Discovery using Eureka
-- Database-per-Service Pattern
-- RESTful Inter-Service Communication
-- Independent Service Deployment
-- Layered Architecture
-- Spring Data JPA Integration
-- MySQL Database Management
-- Scalable Backend Design
+```text
+Microservices-Quiz-App-Spring-Boot
+│
+├── Service Registry
+│   └── Eureka Server
+│
+├── API Gateway
+│   └── Spring Cloud Gateway
+│
+├── Question Service
+│   ├── Controller
+│   ├── Service
+│   ├── Repository
+│   ├── Entity
+│   └── MySQL Database
+│
+└── Quiz Service
+    ├── Controller
+    ├── Service
+    ├── Repository
+    ├── Entity
+    └── MySQL Database
+```
 
 ---
 
-## Application Workflow
+# 🔄 Application Workflow
 
-### Service Startup Flow
+### Service Startup
 
-1. Start Service Registry
-2. Start Question Service
-3. Start Quiz Service
+1. Start Service Registry.
+2. Start API Gateway.
+3. Start Question Service.
+4. Start Quiz Service.
+5. All services register themselves with Eureka Server.
 
-### Registration Flow
+### Request Flow
 
-1. Question Service registers with Eureka
-2. Quiz Service registers with Eureka
-3. Eureka maintains service metadata
-4. Services discover each other dynamically
+1. Client sends request to API Gateway.
+2. API Gateway discovers the target service through Eureka.
+3. Request is routed to the appropriate microservice.
+4. Quiz Service communicates with Question Service whenever questions are required.
+5. Response is returned to the client through API Gateway.
 
 ### Quiz Creation Flow
 
-1. User requests quiz creation
-2. Quiz Service receives request
-3. Quiz Service requests questions from Question Service
-4. Question Service generates and returns question IDs/details
-5. Quiz Service creates and stores the quiz
-6. Quiz Service returns quiz information to the client
+1. User requests quiz creation.
+2. Quiz Service receives the request.
+3. Quiz Service requests questions from Question Service.
+4. Question Service returns randomly selected questions.
+5. Quiz Service creates and stores the quiz.
+6. Quiz information is returned to the user.
+
+### Quiz Submission Flow
+
+1. User submits quiz answers.
+2. Quiz Service receives responses.
+3. Quiz Service validates answers through Question Service.
+4. Score is calculated.
+5. Final result is returned to the user.
 
 ---
 
-## Project Repositories
+# 🚀 Running the Project
 
-| Service | Repository |
-|----------|------------|
-| Service Registry | https://github.com/Shrivastav0yash/quiz_app_service_registry |
-| Question Service | https://github.com/Shrivastav0yash/question_service |
-| Quiz Service | https://github.com/Shrivastav0yash/quiz_service |
+## Clone the Repository
 
----
+```bash
+git clone https://github.com/Shrivastav0yash/Microservices-Quiz-App-Spring-boot.git
+```
 
-## Future Enhancements
+## Start Services in the Following Order
 
-- API Gateway
-- OpenFeign Client
-- Centralized Configuration Server
-- Docker & Docker Compose
-- Kubernetes Deployment
-- Redis Caching
-- JWT Authentication
-- Centralized Logging
-- Monitoring with Prometheus & Grafana
-- CI/CD Pipelines
+### 1. Service Registry
 
----
+Start Eureka Server.
 
-## Learning Objectives
+Default URL:
 
-This project was built to gain practical experience with:
+```text
+http://localhost:8761
+```
 
-- Spring Boot
-- Spring Cloud
-- Microservices Architecture
-- Service Discovery
-- REST API Development
-- Inter-Service Communication
-- Database Design
-- Distributed Systems
-- Scalable Backend Development
+### 2. API Gateway
+
+Start the API Gateway service.
+
+### 3. Question Service
+
+Start the Question Service.
+
+### 4. Quiz Service
+
+Start the Quiz Service.
 
 ---
 
-## Project Status
+# ✅ Verify Service Registration
 
-| Component | Status |
-|------------|--------|
-| Service Registry | ✅ Complete |
-| Question Service | ✅ Complete |
-| Quiz Service | ✅ Complete |
+Open Eureka Dashboard:
 
-The core Quiz Application ecosystem is fully functional and demonstrates modern microservices architecture principles using Spring Boot and Spring Cloud.
+```text
+http://localhost:8761
+```
+
+You should see:
+
+* API-GATEWAY
+* QUESTION-SERVICE
+* QUIZ-SERVICE
+
+registered successfully.
 
 ---
 
-## Author
+# 📚 Microservices Concepts Implemented
+
+* Microservices Architecture
+* API Gateway Pattern
+* Service Discovery
+* Service Registration
+* Database Per Service
+* Inter-Service Communication
+* Dynamic Routing
+* Load Balancing
+* Layered Architecture
+* Dependency Injection
+* RESTful APIs
+* Spring Cloud Ecosystem
+* JPA & Hibernate
+
+---
+
+# 📦 Service Repositories
+
+## Service Registry
+
+Repository:
+
+https://github.com/Shrivastav0yash/quiz_app_service_registry
+
+## API Gateway
+
+Repository:
+
+https://github.com/Shrivastav0yash/api-gateway
+
+## Question Service
+
+Repository:
+
+https://github.com/Shrivastav0yash/question-service
+
+## Quiz Service
+
+Repository:
+
+https://github.com/Shrivastav0yash/quiz-service
+
+---
+
+# 🔮 Future Enhancements
+
+* OpenFeign Client
+* Resilience4j Circuit Breaker
+* Config Server
+* Docker & Docker Compose
+* JWT Authentication
+* Centralized Logging
+* Distributed Tracing
+* Prometheus Monitoring
+* Grafana Dashboards
+* CI/CD Pipeline using GitHub Actions
+* Kubernetes Deployment
+
+---
+
+# 👨‍💻 Author
 
 **Yash Shrivastav**
 
-Java Backend Developer passionate about building scalable backend applications using Java, Spring Boot, Microservices, and Distributed Systems.
+Java Backend Developer | Spring Boot | Microservices
 
-GitHub: https://github.com/Shrivastav0yash
+This project was built to gain hands-on experience with modern Spring Boot Microservices architecture and distributed systems development.
