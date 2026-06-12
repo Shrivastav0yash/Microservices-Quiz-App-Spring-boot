@@ -254,19 +254,19 @@ https://github.com/Shrivastav0yash/quiz_app_service_registry
 
 Repository:
 
-https://github.com/Shrivastav0yash/api-gateway
+https://github.com/Shrivastav0yash/api_gateway_quiz_app
 
 ## Question Service
 
 Repository:
 
-https://github.com/Shrivastav0yash/question-service
+https://github.com/Shrivastav0yash/question_service
 
 ## Quiz Service
 
 Repository:
 
-https://github.com/Shrivastav0yash/quiz-service
+https://github.com/Shrivastav0yash/quiz_service
 
 ---
 
